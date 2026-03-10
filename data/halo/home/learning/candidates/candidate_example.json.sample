@@ -1,0 +1,35 @@
+{
+  "candidate_id": "embedding_1710061800",
+  "timestamp": "2024-03-10T08:30:00",
+  "stage": "embedding",
+  "confidence": 0.97,
+  "classification": {
+    "user_input": "enciende la luz del salon",
+    "tool_name": "light_control",
+    "parameters": {
+      "action": "on",
+      "room": "sala"
+    }
+  },
+  "diagnostics": {
+    "matched_example": {
+      "text": "prende la luz de la sala",
+      "tool": "light_control",
+      "parameters": {"action": "on", "room": "sala"}
+    },
+    "similarity_score": 0.94,
+    "embedding_distance": 0.06
+  },
+  "context": {
+    "user": "ernesto",
+    "time_of_day": "morning",
+    "previous_commands": 0
+  },
+  "execution_result": {
+    "success": true,
+    "user_satisfaction": "inferred_positive"
+  },
+  "candidate_for": "golden_dataset",
+  "reviewed": false,
+  "notes": "High confidence classification. Typical morning routine command."
+}

@@ -1,0 +1,45 @@
+{
+  "entity_id": "sala_luz",
+  "entity_type": "light",
+  "room": "sala",
+  "friendly_name": "Luz del salón",
+  "capabilities": ["on_off", "dimming"],
+  "state": {
+    "power": "on",
+    "brightness": 70,
+    "last_changed": "2024-03-10T07:30:00",
+    "changed_by": "ernesto"
+  },
+  "preferences": {
+    "default_brightness": 70,
+    "max_brightness": 100,
+    "min_brightness": 10,
+    "transition_time_seconds": 2
+  },
+  "usage_patterns": [
+    {
+      "pattern": "Encendida 07:00-23:00",
+      "confidence": 0.88,
+      "days_observed": 85
+    },
+    {
+      "pattern": "Nivel 70% preferido",
+      "confidence": 0.92,
+      "occurrences": 78
+    }
+  ],
+  "mqtt": {
+    "command_topic": "halo/command/light/sala",
+    "state_topic": "halo/state/light/sala",
+    "brightness_topic": "halo/state/light/sala/brightness"
+  },
+  "automation_rules": [
+    {
+      "rule": "Auto-off at 23:30 if Ernesto forgot",
+      "enabled": true,
+      "confidence_required": 0.95
+    }
+  ],
+  "last_maintenance": "2024-02-15",
+  "notes": "Luz principal del salón. Ernesto pasa la mayor parte del día aquí."
+}

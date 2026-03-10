@@ -1,0 +1,119 @@
+scenarios:
+  - name: "missing_room_hardware"
+    description: "Hardware sin room debería pedir aclaración (según diseño)"
+    conversation:
+      - user: "enciende la luz"
+        expect:
+          # Nota: Depende de si el classifier infiere un room default
+          # o si ConversationContextManager detecta parámetro faltante
+          # Por ahora esperamos que light_control se ejecute
+          tool: "light_control"
+          confidence_min: 0.60
+
+  - name: "missing_room_query"
+    description: "Queries sin room deberían usar 'all' por default"
+    conversation:
+      - user: "como esta la casa"
+        expect:
+          tool: "home_status"
+          params:
+            scope: "all"
+          confidence_min: 0.80
+
+  - name: "empty_context_start"
+    description: "Primera interacción sin contexto previo"
+    conversation:
+      - user: "pon el aire a 20"
+        expect:
+          tool: "climate_control"
+          params:
+            temperature: 20
+          # Puede o no tener room, depende del classifier
+
+  - name: "multiple_devices_same_room"
+    description: "Múltiples dispositivos en la misma habitación"
+    conversation:
+      - user: "enciende la luz del dormitorio"
+        expect:
+          tool: "light_control"
+          params:
+            room: "dormitorio"
+
+      - user: "pon el aire a 18"
+        expect:
+          tool: "climate_control"
+          params:
+            temperature: 18
+            room: "dormitorio"  # Heredado
+
+      - user: "cierra las persianas"
+        expect:
+          tool: "blinds_control"
+          params:
+            action: "close"
+            room: "dormitorio"  # Heredado
+
+  - name: "complex_command_multiple_actions"
+    description: "Comando complejo con múltiples acciones (Gemini puede devolver array)"
+    conversation:
+      - user: "enciende las luces del salon y la cocina"
+        expect:
+          # Nota: Gemini devuelve array, tomamos la primera acción
+          tool: "light_control"
+          params:
+            action: "on"
+          confidence_min: 0.80
+
+  - name: "spelling_variations"
+    description: "Variaciones de spelling (salon/salón, garage/garaje)"
+    conversation:
+      - user: "enciende la luz del salón"
+        expect:
+          tool: "light_control"
+          params:
+            action: "on"
+            room: "salon"  # Normalizado a "salon"
+
+      - user: "abre las persianas del garaje"
+        expect:
+          tool: "blinds_control"
+          params:
+            action: "open"
+            room: "garage"  # Normalizado a "garage"
+
+  - name: "high_confidence_embedding"
+    description: "Comandos similares a ejemplos aprendidos tienen alta confianza"
+    conversation:
+      - user: "prende la luz del living"
+        expect:
+          tool: "light_control"
+          classifier: "embedding"  # Debe usar embedding similarity
+          confidence_min: 0.85
+
+  - name: "unknown_room"
+    description: "Room no reconocido pero válido"
+    conversation:
+      - user: "enciende la luz del sotano"
+        expect:
+          tool: "light_control"
+          params:
+            action: "on"
+            room: "sotano"
+          confidence_min: 0.70
+
+  - name: "ambiguous_then_clarify"
+    description: "Usuario da comando ambiguo, luego aclara"
+    conversation:
+      - user: "dame luz"
+        expect:
+          tool: "light_control"
+          params:
+            action: "on"
+          # Puede tener room o no
+
+      - user: "en la cocina"
+        expect:
+          # Este caso es difícil - "en la cocina" solo no es un comando completo
+          # El classifier puede devolver conversation o intentar interpretar
+          # Por ahora no validamos tool específico
+          confidence_min: 0.0  # Permisivo

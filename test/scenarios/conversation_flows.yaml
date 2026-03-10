@@ -1,0 +1,132 @@
+scenarios:
+  - name: "multi_turn_light_control"
+    description: "Control de luces con contexto conversacional - el room se hereda"
+    conversation:
+      - user: "enciende la luz del salon"
+        expect:
+          tool: "light_control"
+          params:
+            action: "on"
+            room: "salon"
+          confidence_min: 0.85
+
+      - user: "ahora apagala"
+        expect:
+          tool: "light_control"
+          params:
+            action: "off"
+            room: "salon"  # room heredado del contexto
+          confidence_min: 0.70
+
+      - user: "ponla al 50%"
+        expect:
+          tool: "light_control"
+          params:
+            action: "dim"
+            room: "salon"  # room heredado
+            brightness: 50
+          confidence_min: 0.70
+
+  - name: "room_context_inheritance"
+    description: "El room se hereda entre diferentes dispositivos"
+    conversation:
+      - user: "enciende la luz de la cocina"
+        expect:
+          tool: "light_control"
+          params:
+            action: "on"
+            room: "cocina"
+          confidence_min: 0.85
+
+      - user: "pon el aire a 22"
+        expect:
+          tool: "climate_control"
+          params:
+            room: "cocina"  # room heredado de luz → aire
+            temperature: 22
+          confidence_min: 0.70
+
+  - name: "context_switch_explicit_room"
+    description: "Cambio explícito de room sobreescribe el contexto"
+    conversation:
+      - user: "enciende la luz del salon"
+        expect:
+          tool: "light_control"
+          params:
+            room: "salon"
+
+      - user: "apaga la luz de la cocina"
+        expect:
+          tool: "light_control"
+          params:
+            action: "off"
+            room: "cocina"  # room explícito, NO hereda "salon"
+          confidence_min: 0.85
+
+  - name: "exact_match_caching"
+    description: "Comandos exactos se cachean y responden rápido"
+    conversation:
+      - user: "enciende la luz del garage"
+        expect:
+          tool: "light_control"
+          params:
+            action: "on"
+            room: "garage"
+
+      - user: "enciende la luz del garage"
+        expect:
+          tool: "light_control"
+          params:
+            action: "on"
+            room: "garage"
+          classifier: "exact_match"  # Segunda vez debe ser exact match
+
+  - name: "anaphora_resolution"
+    description: "Resolución de anáfora - 'la' refiere a luz"
+    conversation:
+      - user: "enciende la luz del dormitorio"
+        expect:
+          tool: "light_control"
+          params:
+            action: "on"
+            room: "dormitorio"
+
+      - user: "apagala"  # "la" = luz
+        expect:
+          tool: "light_control"
+          params:
+            action: "off"
+            room: "dormitorio"  # room heredado
+          confidence_min: 0.70
+
+  - name: "temperature_incremental"
+    description: "Ajustes incrementales de temperatura"
+    conversation:
+      - user: "pon el aire del salon a 24"
+        expect:
+          tool: "climate_control"
+          params:
+            temperature: 24
+            room: "salon"
+
+      - user: "baja dos grados"
+        expect:
+          tool: "climate_control"
+          params:
+            # Nota: Este escenario requiere que el LLM calcule 24-2=22
+            # O que tengamos lógica de ajustes incrementales
+            room: "salon"  # room heredado
+          confidence_min: 0.60
+
+  - name: "conversational_fallback"
+    description: "Comandos no relacionados con smart home → conversation"
+    conversation:
+      - user: "gracias"
+        expect:
+          tool: "conversation"
+          confidence_min: 0.70
+
+      - user: "que hora es"
+        expect:
+          tool: "conversation"
+          confidence_min: 0.70

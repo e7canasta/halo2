@@ -1,0 +1,22 @@
+scenario:
+  name: "Scene Setup - Complete Flow"
+  description: "Usuario configura escena en múltiples turnos (flow completo)"
+  category: "flows"
+
+turns:
+  - turn: 1
+    user: "configura escena nocturno"
+    expect:
+      status: "collecting"
+      message_contains: "habitaciones"
+      agency:
+        classifier_used: ["embedding", "exact_match", "keyword"]
+        decisions_count: 1
+
+  - turn: 2
+    user: "salon y cocina"
+    expect:
+      status: "completed"
+      message_contains: "escena"
+      agency:
+        decisions_count: 1

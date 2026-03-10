@@ -1,0 +1,85 @@
+{
+  "operator_id": "carla",
+  "name": "Carla",
+  "role": "cuidadora_turno_noche",
+  "relationship_type": "partner",
+  "trust_level": 0.96,
+  "days_working_together": 89,
+  "shifts_completed": 89,
+  "total_alerts_handled": 347,
+  "successful_resolutions": 342,
+  "preferences": {
+    "communication": {
+      "after_2am": "voice_primary",
+      "before_2am": "screen_ok",
+      "notification_sound": "none",
+      "notification_haptic": "double_pulse"
+    },
+    "alert_format": {
+      "preferred": "what_happened_where",
+      "example": "Roberto se paró en habitación 102",
+      "avoid": "Alerta en habitación 102"
+    },
+    "feedback": {
+      "wants_end_of_shift_summary": true,
+      "appreciates_positive_reinforcement": true
+    }
+  },
+  "work_patterns": {
+    "shift_hours": {
+      "start": "22:00",
+      "end": "06:00"
+    },
+    "fatigue_curve": {
+      "hour_0_2": 0.1,
+      "hour_2_4": 0.4,
+      "hour_4_6": 0.7,
+      "hour_6_8": 0.9
+    },
+    "peak_efficiency": "22:00-01:00",
+    "most_fatigued": "04:00-06:00"
+  },
+  "stress_indicators": {
+    "simultaneous_alerts_threshold": 3,
+    "response_time_degradation": {
+      "normal": "< 30 seconds",
+      "fatigued": "> 60 seconds"
+    }
+  },
+  "learned_behaviors": [
+    {
+      "behavior": "Prefiere voz después de las 2am",
+      "confidence": 0.98,
+      "occurrences": 67
+    },
+    {
+      "behavior": "Odia los beeps, siempre desactiva audio",
+      "confidence": 1.0,
+      "occurrences": 89
+    },
+    {
+      "behavior": "Aprecia saber QUÉ pasó, no solo DÓNDE",
+      "confidence": 0.94,
+      "occurrences": 52
+    },
+    {
+      "behavior": "Confía más en sugerencias después de 3 meses",
+      "confidence": 0.87,
+      "occurrences": 23
+    }
+  ],
+  "emotional_bond": {
+    "residents_with_deep_connection": ["roberto", "maria", "jose"],
+    "years_in_facility": 4,
+    "burnout_risk": "medio",
+    "notes": "Vínculo afectivo con residentes. Sufre cuando alguno fallece."
+  },
+  "privacy_settings": {
+    "performance_metrics_private": true,
+    "supervisor_can_access": false,
+    "escalation_to_supervisor_only_if": "no_response_3_minutes",
+    "data_retention_days": 30
+  },
+  "last_shift": "2024-03-09T22:00:00",
+  "notes": "Partner de confianza. Care sirve a Carla, NO a la institución."
+}

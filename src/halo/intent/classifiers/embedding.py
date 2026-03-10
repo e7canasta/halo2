@@ -10,13 +10,24 @@ logger = logging.getLogger(__name__)
 
 
 class IntentExample:
-    """Cached intent example with embedding."""
+    """Cached intent example with embedding and slots.
 
-    def __init__(self, text: str, tool_name: str, parameters: dict, embedding: np.ndarray = None):
+    Slots store grammatical positions of parameters for template matching.
+    """
+
+    def __init__(
+        self,
+        text: str,
+        tool_name: str,
+        parameters: dict,
+        embedding: np.ndarray = None,
+        slots: dict = None,
+    ):
         self.text = text
         self.tool_name = tool_name
         self.parameters = parameters
         self.embedding = embedding
+        self.slots = slots or {}  # Dict[param_name, SlotInfo]
 
 
 class EmbeddingClassifier(IntentClassifier):
@@ -78,6 +89,9 @@ class EmbeddingClassifier(IntentClassifier):
 
             # Check if best match exceeds threshold
             if best_match and best_similarity >= self._similarity_threshold:
+                # Store matched example in context for SpaCySlotFiller
+                context["_matched_example"] = best_match
+
                 return ClassificationResult(
                     tool_name=best_match.tool_name,
                     parameters=best_match.parameters,
@@ -95,17 +109,18 @@ class EmbeddingClassifier(IntentClassifier):
         """Similarity threshold for embedding matching."""
         return self._similarity_threshold
 
-    def learn(self, text: str, tool_name: str, parameters: dict):
-        """Learn a new example.
+    def learn(self, text: str, tool_name: str, parameters: dict, slots: dict = None):
+        """Learn a new example with optional slots.
 
         Args:
             text: User input text
             tool_name: Tool that was called
             parameters: Parameters used
+            slots: Optional slot information (param_name -> SlotInfo)
         """
-        example = IntentExample(text, tool_name, parameters)
+        example = IntentExample(text, tool_name, parameters, slots=slots)
         self._examples.append(example)
-        logger.info(f"Learned new example: {text} -> {tool_name}")
+        logger.info(f"Learned new example: {text} -> {tool_name} (slots={bool(slots)})")
 
     def get_examples_count(self) -> int:
         """Get number of learned examples."""

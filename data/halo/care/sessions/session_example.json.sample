@@ -1,0 +1,97 @@
+{
+  "session_id": "shift_2024_03_10_night",
+  "operator": "carla",
+  "session_type": "shift",
+  "start_time": "2024-03-09T22:00:00",
+  "end_time": null,
+  "status": "active",
+  "interaction_count": 8,
+  "shift_context": {
+    "hours_elapsed": 5.25,
+    "fatigue_level": 0.72,
+    "care_mode": "active",
+    "interface_mode": "mobile_screen"
+  },
+  "alerts_this_session": [
+    {
+      "alert_id": "alert_001",
+      "timestamp": "2024-03-09T23:45:00",
+      "resident": "maria",
+      "room": "105",
+      "type": "movement_detected",
+      "severity": "info",
+      "action_taken": "monitored",
+      "resolution": "Resident reading, no intervention needed"
+    },
+    {
+      "alert_id": "alert_002",
+      "timestamp": "2024-03-10T01:30:00",
+      "resident": "jose",
+      "room": "108",
+      "type": "bed_exit",
+      "severity": "warning",
+      "action_taken": "attended",
+      "resolution_time_seconds": 45,
+      "resolution": "Assisted to bathroom, returned to bed"
+    },
+    {
+      "alert_id": "alert_003",
+      "timestamp": "2024-03-10T03:12:00",
+      "resident": "roberto",
+      "room": "102",
+      "type": "standing_detected",
+      "severity": "urgent",
+      "action_taken": "attending",
+      "status": "in_progress",
+      "operator_response_time_seconds": 32
+    }
+  ],
+  "interactions": [
+    {
+      "timestamp": "2024-03-10T03:12:00",
+      "type": "alert",
+      "from": "care",
+      "to": "carla",
+      "message": "Roberto se paró en habitación 102. ¿Vas tú?",
+      "carla_response": "reclaim_gesture",
+      "response_time_seconds": 2
+    },
+    {
+      "timestamp": "2024-03-10T03:12:32",
+      "type": "acknowledgment",
+      "from": "care",
+      "to": "carla",
+      "message": "Te marco ahí, avísame si necesitas algo"
+    },
+    {
+      "timestamp": "2024-03-10T03:14:00",
+      "type": "status_update",
+      "from": "care",
+      "to": "carla",
+      "message": "Todo tranquilo en las otras 29 habitaciones"
+    }
+  ],
+  "metrics": {
+    "total_alerts": 3,
+    "alerts_handled": 2,
+    "alerts_in_progress": 1,
+    "average_response_time_seconds": 38.5,
+    "residents_attended": 2,
+    "false_alarms": 0,
+    "escalations": 0
+  },
+  "context_carryover": {
+    "last_resident_attended": "roberto",
+    "last_room": "102",
+    "operator_location": "habitacion_102",
+    "hands_occupied": true,
+    "voice_mode_active": false
+  },
+  "session_metadata": {
+    "shift_type": "night",
+    "floor": 3,
+    "total_rooms_monitored": 30,
+    "total_residents": 29,
+    "high_risk_residents_tonight": 7
+  }
+}

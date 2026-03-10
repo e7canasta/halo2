@@ -1,0 +1,98 @@
+{
+  "flow_id": "flow_fall_risk_assistance_003",
+  "flow_type": "resident_assistance",
+  "status": "active",
+  "started_at": "2024-03-10T03:12:00",
+  "updated_at": "2024-03-10T03:14:30",
+  "operator": "carla",
+  "resident": "roberto",
+  "room": "102",
+  "trigger": {
+    "type": "sensor_alert",
+    "sensor": "bed_exit_detector",
+    "alert_type": "standing_detected",
+    "severity": "urgent",
+    "fall_risk_level": "high"
+  },
+  "progressive_automation": {
+    "current_level": "assist",
+    "operator_fatigue": 0.72,
+    "escalation_possible": true
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "status": "completed",
+      "action": "detect_event",
+      "event": "Roberto standing beside bed",
+      "timestamp": "2024-03-10T03:12:00",
+      "confidence": 0.96
+    },
+    {
+      "step_id": 2,
+      "status": "completed",
+      "action": "alert_operator",
+      "method": "mobile_vibration",
+      "message": "Roberto se paró en habitación 102. ¿Vas tú?",
+      "operator_response": "reclaim",
+      "response_time_seconds": 2,
+      "timestamp": "2024-03-10T03:12:02"
+    },
+    {
+      "step_id": 3,
+      "status": "completed",
+      "action": "confirm_operator_movement",
+      "operator_location_changed": true,
+      "destination": "habitacion_102",
+      "arrival_time": "2024-03-10T03:12:32",
+      "timestamp": "2024-03-10T03:12:32"
+    },
+    {
+      "step_id": 4,
+      "status": "completed",
+      "action": "enter_protective_silence",
+      "reason": "Operator attending resident",
+      "suppress_non_critical_alerts": true,
+      "timestamp": "2024-03-10T03:12:35"
+    },
+    {
+      "step_id": 5,
+      "status": "in_progress",
+      "action": "monitor_assistance",
+      "duration_seconds": 118,
+      "escalation_timer_active": false,
+      "voice_mode_available": true,
+      "timestamp": "2024-03-10T03:14:30"
+    }
+  ],
+  "safety_context": {
+    "fall_detected": false,
+    "assistance_required": true,
+    "emergency_escalation_threshold_seconds": 180,
+    "time_until_escalation": 62,
+    "backup_available": true
+  },
+  "resident_context": {
+    "name": "roberto",
+    "age": 78,
+    "fall_risk": "high",
+    "mobility_aid": "cane",
+    "side_of_strength": "right",
+    "typical_bathroom_time_minutes": 5,
+    "known_pattern": "03:00am bathroom routine"
+  },
+  "operator_context": {
+    "hands_occupied": true,
+    "can_use_voice": true,
+    "fatigue_level": 0.72,
+    "other_alerts_suppressed": 2,
+    "backup_notified": false
+  },
+  "metadata": {
+    "priority": "urgent",
+    "can_interrupt": false,
+    "auto_close_on_completion": true,
+    "requires_documentation": true
+  },
+  "notes": "Patrón habitual de Roberto. Carla lo conoce bien. Monitoreo en silencio mientras asiste."
+}

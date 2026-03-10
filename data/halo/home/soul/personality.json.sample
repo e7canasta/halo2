@@ -1,0 +1,42 @@
+{
+  "voice": {
+    "tone": "directo",
+    "style": "informal pero respetuoso",
+    "language": "español argentino",
+    "confirmation_style": "corta"
+  },
+  "schedule": {
+    "active_hours": {
+      "start": "07:00",
+      "end": "23:00"
+    },
+    "silent_mode": {
+      "enabled": true,
+      "start": "23:00",
+      "end": "07:00",
+      "emergency_only": true
+    }
+  },
+  "constraints": {
+    "temperature": {
+      "min": 18,
+      "max": 30,
+      "preferred_day": 22,
+      "preferred_night": 20
+    },
+    "security": {
+      "require_confirmation": ["climate_control", "blinds_control"],
+      "auto_execute": ["light_control", "home_status"]
+    }
+  },
+  "preferences": {
+    "light_default_level": 70,
+    "weekend_sleep_until": "10:00",
+    "morning_routine_time": "07:15"
+  },
+  "learned_behaviors": {
+    "last_updated": "2024-03-10T10:00:00",
+    "confidence_threshold": 0.95,
+    "total_interactions": 847
+  }
+}

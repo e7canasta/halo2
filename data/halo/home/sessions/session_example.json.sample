@@ -1,0 +1,46 @@
+{
+  "session_id": "session_2024_03_10_0830",
+  "user": "ernesto",
+  "start_time": "2024-03-10T08:30:00",
+  "end_time": null,
+  "status": "active",
+  "interaction_count": 3,
+  "context": {
+    "last_room": "sala",
+    "last_device": "light",
+    "last_action": "on",
+    "conversation_history": [
+      {
+        "timestamp": "2024-03-10T08:30:15",
+        "user_input": "enciende la luz del salon",
+        "intent": "light_control",
+        "parameters": {"action": "on", "room": "sala"},
+        "result": "success",
+        "response": "Luz de sala encendida"
+      },
+      {
+        "timestamp": "2024-03-10T08:31:22",
+        "user_input": "ponla al 70",
+        "intent": "light_control",
+        "parameters": {"action": "brightness", "room": "sala", "level": 70},
+        "result": "success",
+        "response": "Luz de sala ajustada a 70%",
+        "context_inference": "Inferred room=sala from previous command"
+      },
+      {
+        "timestamp": "2024-03-10T08:32:10",
+        "user_input": "que temperatura hace",
+        "intent": "home_status",
+        "parameters": {"scope": "climate"},
+        "result": "success",
+        "response": "Sala: 21°C (objetivo 22°C), Dormitorio: 19°C (apagado)"
+      }
+    ]
+  },
+  "session_metadata": {
+    "device": "voice",
+    "location": "sala",
+    "mood_detected": "neutral",
+    "urgency": "normal"
+  }
+}

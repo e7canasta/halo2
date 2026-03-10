@@ -1,0 +1,22 @@
+scenario:
+  name: "Determinism Test - Same Input"
+  description: "Mismo input debería usar classifier más rápido la segunda vez"
+  category: "learning"
+
+turns:
+  - turn: 1
+    user: "enciende la luz del salon"
+    expect:
+      status: "completed"
+      tool: "light_control"
+      agency:
+        classifier_used: ["embedding", "exact_match", "keyword", "llm"]
+
+  - turn: 2
+    user: "enciende la luz del salon"
+    expect:
+      status: "completed"
+      tool: "light_control"
+      agency:
+        classifier_used: ["exact_match", "embedding"]
+        decision_why_contains: "cache"

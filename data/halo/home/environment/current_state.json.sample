@@ -1,0 +1,63 @@
+{
+  "timestamp": "2024-03-10T08:30:00",
+  "time_of_day": "morning",
+  "home_mode": "active",
+  "devices": {
+    "lights": {
+      "sala": {
+        "state": "on",
+        "level": 70,
+        "last_changed": "2024-03-10T07:30:00"
+      },
+      "cocina": {
+        "state": "off",
+        "level": 0,
+        "last_changed": "2024-03-10T06:00:00"
+      },
+      "dormitorio": {
+        "state": "off",
+        "level": 0,
+        "last_changed": "2024-03-10T07:00:00"
+      }
+    },
+    "climate": {
+      "sala": {
+        "state": "on",
+        "mode": "heat",
+        "current_temperature": 21,
+        "target_temperature": 22,
+        "last_changed": "2024-03-10T07:00:00"
+      },
+      "dormitorio": {
+        "state": "off",
+        "mode": "heat",
+        "current_temperature": 19,
+        "target_temperature": 20,
+        "last_changed": "2024-03-10T07:00:00"
+      }
+    },
+    "blinds": {
+      "sala": {
+        "state": "open",
+        "position": 100,
+        "last_changed": "2024-03-10T07:30:00"
+      },
+      "dormitorio": {
+        "state": "closed",
+        "position": 0,
+        "last_changed": "2024-03-09T22:00:00"
+      }
+    }
+  },
+  "occupancy": {
+    "home": true,
+    "occupied_rooms": ["sala"],
+    "last_motion_detected": "2024-03-10T08:25:00"
+  },
+  "context": {
+    "last_room_mentioned": "sala",
+    "last_device_interacted": "light_control",
+    "last_action": "on",
+    "conversation_depth": 3
+  }
+}

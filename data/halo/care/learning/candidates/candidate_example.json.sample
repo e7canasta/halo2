@@ -1,0 +1,50 @@
+{
+  "candidate_id": "embedding_1710119520",
+  "timestamp": "2024-03-10T03:12:00",
+  "stage": "embedding",
+  "confidence": 0.98,
+  "classification": {
+    "sensor_input": "bed_exit_standing_102",
+    "interpretation": "roberto se paró en habitación 102",
+    "tool_name": "alert_operator",
+    "parameters": {
+      "resident": "roberto",
+      "room": "102",
+      "action": "standing",
+      "severity": "urgent",
+      "fall_risk": "high"
+    }
+  },
+  "diagnostics": {
+    "sensor_pattern": "bed_pressure_off + vertical_position_detected",
+    "historical_match": "Previous 27 occurrences at 03:00am",
+    "context_confidence": 0.94
+  },
+  "context": {
+    "operator": "carla",
+    "shift_hour": 5.25,
+    "operator_fatigue": 0.72,
+    "care_mode": "active",
+    "resident_known_pattern": true
+  },
+  "operator_response": {
+    "response_time_seconds": 2,
+    "action": "reclaimed_alert",
+    "arrived_at_room_seconds": 32,
+    "assistance_successful": true
+  },
+  "outcome": {
+    "fall_occurred": false,
+    "assistance_provided": true,
+    "escalation_required": false,
+    "resolution": "Assisted to bathroom, returned safely to bed"
+  },
+  "learning_value": {
+    "pattern_reinforcement": "Roberto 03:00am bathroom routine",
+    "operator_trust": "Carla responds quickly even when fatigued",
+    "effectiveness": "Successful intervention, no incident"
+  },
+  "candidate_for": "golden_dataset_care",
+  "reviewed": false,
+  "notes": "Textbook case of successful fall prevention. Carla's experience with Roberto evident in quick response despite fatigue."
+}

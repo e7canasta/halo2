@@ -1,0 +1,24 @@
+scenario:
+  name: "Context Inheritance - Anaphora"
+  description: "Usuario asume contexto del turno previo (herencia de room)"
+  category: "context"
+
+turns:
+  - turn: 1
+    user: "enciende la luz del salon"
+    expect:
+      status: "completed"
+      tool: "light_control"
+      message_contains: "luz"
+      agency:
+        classifier_used: ["embedding", "exact_match", "keyword"]
+
+  - turn: 2
+    user: "ahora apagala"
+    expect:
+      status: "completed"
+      tool: "light_control"
+      message_contains: "luz"
+      agency:
+        classifier_used: ["embedding", "exact_match", "keyword"]
+        decision_why_contains: "context"

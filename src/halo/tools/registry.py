@@ -119,6 +119,15 @@ TOOLS = [
 ]
 
 
+def get_all_tools() -> list[Tool]:
+    """Get all registered tools.
+
+    Returns:
+        List of all Tool instances
+    """
+    return TOOLS
+
+
 def get_tool(name: str) -> Tool | None:
     """Get tool by name.
 

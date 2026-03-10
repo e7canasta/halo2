@@ -1,0 +1,70 @@
+{
+  "timestamp": "2024-03-10T03:15:00",
+  "time_of_day": "deep_night",
+  "shift_context": {
+    "operator_on_duty": "carla",
+    "shift_start": "2024-03-09T22:00:00",
+    "hours_elapsed": 5.25,
+    "operator_fatigue": 0.72,
+    "operator_location": "habitacion_102",
+    "operator_status": "attending_resident"
+  },
+  "floor_state": {
+    "total_rooms": 30,
+    "total_residents": 29,
+    "occupied_rooms": 29,
+    "monitored_by_care": 29,
+    "attended_by_operator": 1
+  },
+  "alert_level": "active",
+  "active_alerts": [
+    {
+      "alert_id": "alert_001",
+      "room": "102",
+      "resident": "roberto",
+      "type": "standing_detected",
+      "severity": "urgent",
+      "timestamp": "2024-03-10T03:12:00",
+      "status": "being_attended",
+      "attended_by": "carla"
+    }
+  ],
+  "residents_awake": [
+    {
+      "room": "102",
+      "name": "roberto",
+      "reason": "bathroom",
+      "fall_risk": "high",
+      "being_attended": true
+    },
+    {
+      "room": "105",
+      "name": "maria",
+      "reason": "deambulation",
+      "fall_risk": "low",
+      "being_attended": false,
+      "notes": "Habitual, no requiere intervención"
+    }
+  ],
+  "residents_sleeping": 27,
+  "care_mode": "active",
+  "interface_mode": "mobile_screen",
+  "vigilance_status": {
+    "rooms_with_sensors": 30,
+    "sensors_active": 30,
+    "sensors_error": 0,
+    "last_full_sweep": "2024-03-10T03:14:00"
+  },
+  "operator_performance": {
+    "alerts_handled_this_shift": 8,
+    "average_response_time_seconds": 45,
+    "saturation_detected": false,
+    "directive_mode_active": false
+  },
+  "context": {
+    "last_alert": "roberto standing in room 102",
+    "last_resident_attended": "roberto",
+    "conversation_depth": 2,
+    "operator_hands_occupied": true
+  }
+}

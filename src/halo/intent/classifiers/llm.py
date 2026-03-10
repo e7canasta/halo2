@@ -29,20 +29,35 @@ class LLMClassifier(IntentClassifier):
 
         Args:
             user_input: User's input
-            context: Conversation context
+            context: Conversation context (may include _conversation_history)
 
         Returns:
             ClassificationResult (always, this is the fallback)
         """
         import json
 
-        context_summary = json.dumps(context) if context else "{}"
-        system_content = f"{self.system_prompt}\n\nContext: {context_summary}"
+        # Extract conversation history if available
+        conversation_history = context.get("_conversation_history", []) if context else []
 
-        messages = [
-            {"role": "system", "content": system_content},
-            {"role": "user", "content": user_input},
-        ]
+        # Build messages array
+        messages = []
+
+        # System prompt
+        if conversation_history:
+            # Include conversation history in system prompt
+            history_text = "\n".join(
+                f"{msg['role']}: {msg['content']}" for msg in conversation_history
+            )
+            system_content = f"{self.system_prompt}\n\nRecent conversation:\n{history_text}"
+        else:
+            # Fallback to legacy context serialization
+            context_summary = json.dumps(context) if context else "{}"
+            system_content = f"{self.system_prompt}\n\nContext: {context_summary}"
+
+        messages.append({"role": "system", "content": system_content})
+
+        # User message
+        messages.append({"role": "user", "content": user_input})
 
         # Format with chat template if available
         if hasattr(self.backend, "format_messages"):

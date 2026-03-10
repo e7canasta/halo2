@@ -1,29 +1,36 @@
 """Context enricher filter - enriches parameters with context."""
 
+from typing import Optional
 from ..base import ToolFilter, FilterResult, FilterStage
+from ....context.conversation_manager import ConversationContextManager
+from ....intent.base import ClassificationResult
 import logging
 
 logger = logging.getLogger(__name__)
 
 
 class ContextEnricher(ToolFilter):
-    """Enriches tool parameters with information from context.
+    """Enriches tool parameters with information from conversational context.
+
+    Uses ConversationContextManager to track and infer missing parameters
+    from conversation history.
 
     Examples:
-    - "enciende la luz" (sin room) → usa last_room del contexto
-    - "sube más" (sin level) → usa current_level + 10
-    - "apágala" → usa last_device del contexto
+    - "enciende la luz del salon" then "apágala" → infers room="salon"
+    - "pon el aire a 22" in same room → infers room from last turn
+    - "baja dos grados" → infers room and calculates new temperature
     """
 
-    def __init__(self):
+    def __init__(self, context_manager: Optional[ConversationContextManager] = None):
         super().__init__("context_enricher", FilterStage.PRE_EXECUTION)
+        self.context_manager = context_manager
 
     def _do_filter(self, data: dict, context: dict) -> FilterResult:
-        """Enrich parameters with context.
+        """Enrich parameters with conversational context.
 
         Args:
             data: {"tool_name": str, "parameters": dict}
-            context: Conversation context
+            context: Conversation context dict
 
         Returns:
             FilterResult (modify if enriched, pass otherwise)
@@ -32,13 +39,37 @@ class ContextEnricher(ToolFilter):
         parameters = data.get("parameters", {}).copy()
         enriched = False
 
-        # Enrich based on tool type
-        if tool_name == "light_control":
-            enriched |= self._enrich_light_params(parameters, context)
-        elif tool_name == "climate_control":
-            enriched |= self._enrich_climate_params(parameters, context)
-        elif tool_name == "blinds_control":
-            enriched |= self._enrich_blinds_params(parameters, context)
+        # Strategy 1: Use ConversationContextManager if available (NEW)
+        if self.context_manager:
+            user_input = context.get("_user_input", "")
+
+            # Create temporary ClassificationResult for merge_context
+            temp_result = ClassificationResult(
+                tool_name=tool_name,
+                parameters=parameters.copy(),
+                confidence=1.0,
+                classifier_used="temp",
+                cached=False
+            )
+
+            # Merge context
+            merged = self.context_manager.merge_context(temp_result, user_input)
+
+            # Check if parameters changed
+            if merged.parameters != parameters:
+                parameters = merged.parameters
+                enriched = True
+                logger.info(f"ConversationContext enriched: {tool_name} {parameters}")
+
+        # Strategy 2: Fallback to legacy dict-based enrichment
+        else:
+            # Legacy enrichment based on tool type
+            if tool_name == "light_control":
+                enriched |= self._enrich_light_params(parameters, context)
+            elif tool_name == "climate_control":
+                enriched |= self._enrich_climate_params(parameters, context)
+            elif tool_name == "blinds_control":
+                enriched |= self._enrich_blinds_params(parameters, context)
 
         if enriched:
             logger.info(f"Context enriched parameters for {tool_name}: {parameters}")

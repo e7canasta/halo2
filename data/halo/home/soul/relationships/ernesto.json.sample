@@ -1,0 +1,56 @@
+{
+  "user_id": "ernesto",
+  "name": "Ernesto",
+  "relationship_type": "homeowner",
+  "trust_level": 0.94,
+  "days_interacting": 120,
+  "total_commands": 847,
+  "successful_commands": 831,
+  "preferences": {
+    "lights": {
+      "sala": {
+        "preferred_level": 70,
+        "notes": "100% es demasiado fuerte para él"
+      },
+      "dormitorio": {
+        "preferred_level": 30,
+        "notes": "Luz tenue antes de dormir"
+      }
+    },
+    "climate": {
+      "day_temperature": 22,
+      "night_temperature": 20,
+      "notes": "Es friolento, nunca bajo 18°C"
+    },
+    "schedule": {
+      "weekday_wake": "07:00",
+      "weekend_wake": "10:00",
+      "sleep_time": "23:00",
+      "coffee_time": "07:15"
+    }
+  },
+  "communication_style": {
+    "preferred_response": "corta y directa",
+    "language_variants": ["apagá", "encendé", "subí", "bajá"],
+    "tolerance_for_suggestions": "media"
+  },
+  "learned_patterns": [
+    {
+      "pattern": "Cierra persianas al anochecer",
+      "confidence": 0.92,
+      "occurrences": 85
+    },
+    {
+      "pattern": "Abre persianas al amanecer",
+      "confidence": 0.88,
+      "occurrences": 78
+    },
+    {
+      "pattern": "Los domingos no molestarlo antes de 10am",
+      "confidence": 0.95,
+      "occurrences": 16
+    }
+  ],
+  "last_interaction": "2024-03-10T08:30:00",
+  "notes": "Usuario principal. Valora la privacidad y la no-intrusividad."
+}

@@ -1,0 +1,75 @@
+{
+  "shift_id": "shift_2024_03_09_night",
+  "date": "2024-03-09",
+  "shift_type": "night",
+  "start_time": "22:00:00",
+  "end_time": "06:00:00",
+  "operator": {
+    "id": "carla",
+    "name": "Carla",
+    "role": "cuidadora",
+    "experience_years": 4,
+    "shifts_this_week": 4,
+    "consecutive_nights": 4
+  },
+  "floor": {
+    "floor_number": 3,
+    "total_rooms": 30,
+    "residents_count": 29,
+    "high_risk_residents": 7,
+    "medium_risk_residents": 15,
+    "low_risk_residents": 7
+  },
+  "shift_briefing": {
+    "special_attention": [
+      {
+        "resident": "roberto",
+        "room": "102",
+        "reason": "Increased fall risk, woke up 3 times last night",
+        "instructions": "Keep extra vigilance 02:00-04:00"
+      },
+      {
+        "resident": "maria",
+        "room": "105",
+        "reason": "Deambulation habitual, no risk",
+        "instructions": "Monitor but don't intervene unless requested"
+      }
+    ],
+    "medications_pending": [
+      {
+        "resident": "jose",
+        "room": "108",
+        "time": "00:00",
+        "medication": "Sleep aid"
+      }
+    ],
+    "equipment_status": {
+      "sensors": "all_operational",
+      "call_buttons": "all_operational",
+      "backup_power": "available"
+    }
+  },
+  "metrics_tracking": {
+    "alerts_count": 0,
+    "residents_attended": 0,
+    "incidents": 0,
+    "falls": 0,
+    "successful_interventions": 0,
+    "escalations_to_supervisor": 0
+  },
+  "fatigue_tracking": {
+    "enabled": true,
+    "current_fatigue": 0.0,
+    "saturation_threshold": 0.7,
+    "break_taken": false,
+    "break_recommended_at_hour": 4
+  },
+  "care_mode_history": [
+    {
+      "mode": "calm",
+      "start": "22:00:00",
+      "reason": "Shift start, all residents sleeping"
+    }
+  ],
+  "notes": "Inicio de turno tranquilo. Todos los residentes durmiendo excepto María que está despierta leyendo."
+}

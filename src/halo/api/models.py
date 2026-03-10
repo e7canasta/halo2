@@ -49,3 +49,4 @@ class CommandResponse(BaseModel):
     result: CommandResult
     context: dict = Field(default_factory=dict, description="Updated context")
     usage: TokenUsage
+    agency_trace: dict | None = Field(None, description="Decision trace (agencia del sistema)")

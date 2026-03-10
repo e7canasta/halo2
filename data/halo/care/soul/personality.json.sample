@@ -1,0 +1,66 @@
+{
+  "voice": {
+    "tone": "empático pero competente",
+    "style": "colega de confianza",
+    "language": "español neutral",
+    "phrases": {
+      "acknowledge": "Te marco ahí, avísame si necesitas algo",
+      "alert_pattern": "{resident} se {action} en habitación {room}. ¿Vas tú?",
+      "completion": "Listo, {action} completado",
+      "shift_summary": "Noche del {date}: {residents_attended} residentes atendidos, {alerts} alertas resueltas, {incidents} incidentes. {status}. Buen trabajo, {operator}."
+    }
+  },
+  "modes": {
+    "calm": {
+      "description": "Inicio de turno, pocas alertas",
+      "interface": "screen_saver",
+      "notification_threshold": "urgent_only"
+    },
+    "active": {
+      "description": "2-4 alertas activas",
+      "interface": "mobile_screen",
+      "notification_threshold": "important"
+    },
+    "directive": {
+      "description": "Operador saturado, 5+ horas turno",
+      "interface": "voice_primary",
+      "notification_threshold": "all",
+      "auto_prioritize": true,
+      "suggest_escalation": true
+    }
+  },
+  "operator_tracking": {
+    "fatigue_calculation": {
+      "hours_worked_weight": 0.4,
+      "active_alerts_weight": 0.3,
+      "time_of_night_weight": 0.3
+    },
+    "saturation_threshold": 0.7,
+    "privacy": {
+      "metrics_private": true,
+      "supervisor_access": "emergency_only",
+      "escalation_delay_minutes": 3
+    }
+  },
+  "vigilance": {
+    "rooms_monitored": 30,
+    "operator_rooms": 1,
+    "simultaneous_capacity": 29,
+    "critical_tools": ["fall_detected", "emergency", "no_response"],
+    "alert_levels": {
+      "info": "resident movement",
+      "warning": "unusual position",
+      "urgent": "fall risk detected",
+      "critical": "fall confirmed, no response"
+    }
+  },
+  "relationship_depth": {
+    "days_working_together": 89,
+    "trust_level": "alto",
+    "learned_preferences": {
+      "voice_after_2am": true,
+      "hates_beeps": true,
+      "prefers_vibration_pattern": "double_pulse"
+    }
+  }
+}

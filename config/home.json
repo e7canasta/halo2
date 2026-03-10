@@ -1,0 +1,45 @@
+{
+  "domain": "home",
+  "name": "Halo Home",
+  "description": "Home automation assistant",
+  "store_path": "data/halo/home",
+  "policy": "threshold",
+  "model": {
+    "backend": "qwen",
+    "model_name": "Qwen/Qwen2.5-0.5B-Instruct"
+  },
+  "classifiers": {
+    "enable_embeddings": true,
+    "enable_spacy": true,
+    "enable_functiongemma": false,
+    "enable_gemini": false
+  },
+  "observability": {
+    "enable_telemetry": true,
+    "enable_learning": true,
+    "enable_classification_log": true
+  },
+  "tools": {
+    "light_control": {
+      "enabled": true,
+      "confidence_threshold": 0.95
+    },
+    "climate_control": {
+      "enabled": true,
+      "confidence_threshold": 0.95
+    },
+    "blinds_control": {
+      "enabled": true,
+      "confidence_threshold": 0.95
+    },
+    "home_status": {
+      "enabled": true,
+      "confidence_threshold": 0.80
+    }
+  },
+  "context": {
+    "load_soul_on_init": true,
+    "load_environment_on_init": true,
+    "session_timeout_minutes": 30
+  }
+}

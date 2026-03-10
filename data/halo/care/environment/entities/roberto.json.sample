@@ -1,0 +1,100 @@
+{
+  "resident_id": "roberto",
+  "entity_type": "resident",
+  "room": "102",
+  "full_name": "Roberto García",
+  "age": 78,
+  "admission_date": "2020-05-15",
+  "years_in_facility": 4,
+  "risk_profile": {
+    "fall_risk": "high",
+    "deambulation": "occasional",
+    "confusion_risk": "low",
+    "medical_urgency": "medium"
+  },
+  "mobility": {
+    "uses_walker": false,
+    "uses_cane": true,
+    "side_of_strength": "right",
+    "mobility_aid_location": "right_side_of_bed",
+    "transfer_assistance": "minimal"
+  },
+  "sleep_patterns": [
+    {
+      "pattern": "Despierta 03:00am para ir al baño",
+      "confidence": 0.94,
+      "occurrences_last_30_days": 27
+    },
+    {
+      "pattern": "Duerme 22:30-06:30 con interrupciones",
+      "confidence": 0.88,
+      "days_observed": 120
+    }
+  ],
+  "bathroom_habits": {
+    "frequency_night": "1-2 times",
+    "preferred_time": "03:00",
+    "requires_assistance": true,
+    "call_button_usage": "inconsistent",
+    "notes": "A veces se levanta solo sin llamar. Alto riesgo de caída."
+  },
+  "safety_considerations": {
+    "fall_history": [
+      {
+        "date": "2023-11-20",
+        "location": "bathroom",
+        "severity": "minor",
+        "resulted_in_injury": false
+      }
+    ],
+    "alerts_generated_last_week": 12,
+    "successful_interventions_last_week": 11,
+    "actual_falls_last_month": 0
+  },
+  "bed_configuration": {
+    "rails_up": true,
+    "height": "low",
+    "position": "flat",
+    "side_lighting": "motion_activated"
+  },
+  "sensors": {
+    "bed_sensor": "active",
+    "motion_sensor": "active",
+    "bathroom_sensor": "active",
+    "call_button": "active",
+    "floor_mat": "active"
+  },
+  "relationship_with_staff": {
+    "primary_caregiver_day": "Ana",
+    "primary_caregiver_night": "Carla",
+    "years_with_carla": 4,
+    "trust_level": "high",
+    "communication_style": "cooperative",
+    "notes": "Carla tiene vínculo afectivo con Roberto. Él confía en ella."
+  },
+  "medical_info": {
+    "conditions": ["Parkinson's disease (early stage)", "Hypertension"],
+    "medications_night": [
+      {
+        "name": "Blood pressure medication",
+        "time": "21:00",
+        "affects_sleep": false
+      }
+    ],
+    "allergies": [],
+    "emergency_contact": {
+      "name": "María García (daughter)",
+      "phone": "+54-11-1234-5678",
+      "relationship": "daughter"
+    }
+  },
+  "preferences": {
+    "temperature": 22,
+    "lighting": "dim",
+    "noise_sensitivity": "low",
+    "social": "enjoys conversation"
+  },
+  "last_incident": "2024-03-08T03:15:00",
+  "last_alert": "2024-03-10T03:12:00",
+  "notes": "Residente de alta prioridad. Vigilancia nocturna crítica 02:00-04:00. Carla lo conoce muy bien y puede anticipar sus necesidades."
+}

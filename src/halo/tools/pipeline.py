@@ -29,11 +29,12 @@ class ToolExecutionPipeline:
     - ALL post-filters run for learning and formatting
     """
 
-    def __init__(self, enable_nlg: bool = True):
+    def __init__(self, enable_nlg: bool = True, conversation_manager=None):
         """Initialize pipeline with default filters.
 
         Args:
             enable_nlg: Enable NLG formatting in post-execution
+            conversation_manager: Optional ConversationContextManager for context enrichment
         """
         # Pre-execution filters (run before tool execution)
         self.pre_filters = FilterChain(
@@ -41,7 +42,7 @@ class ToolExecutionPipeline:
             [
                 SchemaValidator(),  # 1. Validate schema
                 ParameterNormalizer(),  # 2. Normalize params
-                ContextEnricher(),  # 3. Enrich with context
+                ContextEnricher(context_manager=conversation_manager),  # 3. Enrich with context
             ],
         )
 
@@ -161,20 +162,29 @@ class ToolExecutionPipeline:
         self.post_filters.remove_filter(name)
 
 
-# Global pipeline instance
+# Global pipeline instance (legacy, without conversation manager)
 _pipeline: ToolExecutionPipeline | None = None
 
 
-def get_pipeline(enable_nlg: bool = True) -> ToolExecutionPipeline:
-    """Get global pipeline instance.
+def get_pipeline(enable_nlg: bool = True, conversation_manager=None) -> ToolExecutionPipeline:
+    """Get pipeline instance.
 
     Args:
         enable_nlg: Enable NLG formatting
+        conversation_manager: Optional ConversationContextManager
 
     Returns:
-        ToolExecutionPipeline singleton
+        ToolExecutionPipeline instance
+        - If conversation_manager is provided, creates a new instance
+        - Otherwise returns singleton for backward compatibility
     """
     global _pipeline
+
+    # If conversation_manager provided, always create new instance
+    if conversation_manager is not None:
+        return ToolExecutionPipeline(enable_nlg=enable_nlg, conversation_manager=conversation_manager)
+
+    # Legacy: singleton without conversation manager
     if _pipeline is None:
         _pipeline = ToolExecutionPipeline(enable_nlg=enable_nlg)
     return _pipeline

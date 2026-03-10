@@ -1,0 +1,70 @@
+{
+  "domain": "care",
+  "name": "Halo Care",
+  "description": "Elderly care assistant for night shift caregivers",
+  "store_path": "data/halo/care",
+  "policy": "care",
+  "model": {
+    "backend": "qwen",
+    "model_name": "Qwen/Qwen2.5-0.5B-Instruct"
+  },
+  "classifiers": {
+    "enable_embeddings": true,
+    "enable_spacy": true,
+    "enable_functiongemma": false,
+    "enable_gemini": false
+  },
+  "observability": {
+    "enable_telemetry": true,
+    "enable_learning": true,
+    "enable_classification_log": true,
+    "enable_alerts": true
+  },
+  "tools": {
+    "alert_operator": {
+      "enabled": true,
+      "confidence_threshold": 0.90
+    },
+    "resident_status": {
+      "enabled": true,
+      "confidence_threshold": 0.85
+    },
+    "fall_detected": {
+      "enabled": true,
+      "confidence_threshold": 0.98,
+      "critical": true
+    },
+    "escalate_supervisor": {
+      "enabled": true,
+      "confidence_threshold": 0.95,
+      "delay_seconds": 180
+    }
+  },
+  "context": {
+    "load_soul_on_init": true,
+    "load_environment_on_init": true,
+    "load_shift_context_on_init": true,
+    "session_timeout_minutes": 480,
+    "fatigue_tracking": true,
+    "operator_privacy": {
+      "metrics_private": true,
+      "supervisor_access": "emergency_only"
+    }
+  },
+  "care_modes": {
+    "calm": {
+      "interface": "screen_saver",
+      "notification_threshold": "urgent_only"
+    },
+    "active": {
+      "interface": "mobile_screen",
+      "notification_threshold": "important"
+    },
+    "directive": {
+      "interface": "voice_primary",
+      "notification_threshold": "all",
+      "auto_prioritize": true,
+      "suggest_escalation": true
+    }
+  }
+}

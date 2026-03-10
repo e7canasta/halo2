@@ -1,0 +1,65 @@
+{
+  "flow_id": "flow_climate_adjustment_001",
+  "flow_type": "climate_multi_room",
+  "status": "active",
+  "started_at": "2024-03-10T08:35:00",
+  "updated_at": "2024-03-10T08:35:45",
+  "user": "ernesto",
+  "trigger": {
+    "type": "user_command",
+    "original_input": "hace frio, subi la temperatura en toda la casa"
+  },
+  "intent": {
+    "tool": "climate_control",
+    "base_parameters": {
+      "action": "set_temp",
+      "temperature": 23
+    },
+    "multi_room": true
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "status": "completed",
+      "action": "identify_rooms",
+      "result": ["sala", "dormitorio"],
+      "timestamp": "2024-03-10T08:35:10"
+    },
+    {
+      "step_id": 2,
+      "status": "completed",
+      "action": "check_current_temperatures",
+      "result": {
+        "sala": 21,
+        "dormitorio": 19
+      },
+      "timestamp": "2024-03-10T08:35:15"
+    },
+    {
+      "step_id": 3,
+      "status": "completed",
+      "action": "confirm_with_user",
+      "question": "¿Subir temperatura a 23°C en sala y dormitorio?",
+      "user_response": "si",
+      "timestamp": "2024-03-10T08:35:25"
+    },
+    {
+      "step_id": 4,
+      "status": "in_progress",
+      "action": "execute_climate_change",
+      "rooms_pending": ["dormitorio"],
+      "rooms_completed": ["sala"],
+      "timestamp": "2024-03-10T08:35:45"
+    }
+  ],
+  "context": {
+    "requires_confirmation": true,
+    "confirmation_received": true,
+    "estimated_completion_time": "2024-03-10T08:36:00"
+  },
+  "metadata": {
+    "priority": "normal",
+    "can_interrupt": true,
+    "timeout_minutes": 5
+  }
+}

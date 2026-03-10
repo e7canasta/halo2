@@ -1,0 +1,106 @@
+"""Custom entity definitions for home automation NER."""
+
+# Room entities
+ROOMS = [
+    "sala",
+    "salón",
+    "salon",
+    "living",
+    "cocina",
+    "dormitorio",
+    "habitacion",
+    "habitación",
+    "cuarto",
+    "pieza",
+    "baño",
+    "bano",
+    "comedor",
+    "garage",
+    "jardin",
+    "jardín",
+    "terraza",
+    "patio",
+    "entrada",
+    "pasillo",
+]
+
+# Device entities
+DEVICES = [
+    "luz",
+    "luces",
+    "lampara",
+    "lámpara",
+    "persiana",
+    "persianas",
+    "cortina",
+    "cortinas",
+    "aire",
+    "aire acondicionado",
+    "calefaccion",
+    "calefacción",
+    "termostato",
+    "ventilador",
+]
+
+# Action entities
+ACTIONS = [
+    "encender",
+    "enciende",
+    "apagar",
+    "apaga",
+    "prender",
+    "prende",
+    "abrir",
+    "abre",
+    "cerrar",
+    "cierra",
+    "subir",
+    "sube",
+    "bajar",
+    "baja",
+]
+
+# Number words to integers (Spanish)
+NUMBER_TEXT = {
+    "cero": 0,
+    "uno": 1,
+    "una": 1,
+    "dos": 2,
+    "tres": 3,
+    "cuatro": 4,
+    "cinco": 5,
+    "seis": 6,
+    "siete": 7,
+    "ocho": 8,
+    "nueve": 9,
+    "diez": 10,
+    "once": 11,
+    "doce": 12,
+    "trece": 13,
+    "catorce": 14,
+    "quince": 15,
+    "dieciseis": 16,
+    "dieciséis": 16,
+    "diecisiete": 17,
+    "dieciocho": 18,
+    "diecinueve": 19,
+    "veinte": 20,
+    "veintiuno": 21,
+    "veintidos": 22,
+    "veintidós": 22,
+    "veintitres": 23,
+    "veintitrés": 23,
+    "veinticuatro": 24,
+    "veinticinco": 25,
+    "treinta": 30,
+    "cuarenta": 40,
+    "cincuenta": 50,
+    "sesenta": 60,
+    "setenta": 70,
+    "ochenta": 80,
+    "noventa": 90,
+    "cien": 100,
+}
+
+# Custom entity labels for spaCy
+CUSTOM_ENTITY_LABELS = ["ROOM", "DEVICE", "ACTION", "NUMBER"]
