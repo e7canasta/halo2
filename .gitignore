@@ -23,3 +23,6 @@ archive
 
 *.md
 *.http
+.env.local
+.local/
+
